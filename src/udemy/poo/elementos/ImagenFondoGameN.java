@@ -19,36 +19,36 @@ import udemy.poo.interfaz.Actions;
  *
  * @author Ingenian Software
  */
-public class ImagenFondo implements Actions{
+public class ImagenFondoGameN implements Actions{
     private Image imagen = null;
     private Image imagenDos = null;
     private Component componente;
     private int x = -20;
-    private static ImagenFondo objetoUnico;
+    private static ImagenFondoGameN objetoUnico;
     private MediaTracker tracker;
-    private Image imagenTres = null;
     
-    public static ImagenFondo imagenFondo(){
+    
+    public static ImagenFondoGameN imagenFondo(){
         if(objetoUnico == null){
-            objetoUnico = new ImagenFondo();
+            objetoUnico = new ImagenFondoGameN();
         }
         return objetoUnico;
     }
     
-    private ImagenFondo(){
+    private ImagenFondoGameN(){
         
     }
     
-    public void configuracion(Component componente, String archivo, String personaje, String orbe){
+    public void configuracion(Component componente, String archivo, String personaje){
         this.componente = componente;
         tracker = new MediaTracker(componente);
         Toolkit herram = Toolkit.getDefaultToolkit();
         imagen = herram.getImage(getClass().getResource("/udemy/poo/recursos/" + archivo));
         imagenDos = herram.getImage(getClass().getResource("/udemy/poo/recursos/" + personaje));
-        imagenTres = herram.getImage(getClass().getResource("/udemy/poo/recursos/" + orbe));
+        
         tracker.addImage(imagen, 1);
         tracker.addImage(imagenDos, 2);
-        tracker.addImage(imagenTres, 3);
+        
         //Espera que todas las imagenes sean cargadas
         try {
             tracker.waitForAll();
@@ -60,8 +60,8 @@ public class ImagenFondo implements Actions{
     @Override
     public void pintar(Graphics2D g) {
         g.drawImage(imagen, 0, 0, this.componente.getWidth(), this.componente.getHeight(), null);
-        g.drawImage(imagenDos, x + 40, 90, 300, 368, null);
-        g.drawImage(imagenTres, 490, 70, 50, 50, null);
+        g.drawImage(imagenDos, x + 800, 40, 300, 368, null);
+        
     }
 
     @Override
