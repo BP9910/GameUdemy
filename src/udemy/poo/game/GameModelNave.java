@@ -10,6 +10,7 @@ import javax.swing.Timer;
 import udemy.poo.elementos.ImagenFondo;
 import udemy.poo.elementos.ImagenFondoGameN;
 import udemy.poo.elementos.ImagenFondoGaming;
+import udemy.poo.elementos.Nave;
 import udemy.poo.elementos.burbujas;
 import udemy.poo.pantalla.Pantalla;
 
@@ -37,7 +38,7 @@ public class GameModelNave extends javax.swing.JDialog {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(this);
-        this.jPanel1.requestFocusInWindow();
+        this.jPanel2.requestFocusInWindow();
         
         ImagenFondoGameN fondoImagen = ImagenFondoGameN.imagenFondo();
         fondoImagen.configuracion(this.jPanel1, "AvanceComplete.gif", "SecondPrincess.gif");
@@ -48,9 +49,14 @@ public class GameModelNave extends javax.swing.JDialog {
         burbujas Burbujas = burbujas.getburbujas();
         Burbujas.configurar(this.jPanel2, "orbe.png");
         
+        Nave nave = Nave.getNave();
+        nave.configurar(this.jPanel2, "nave.png");
+        
+        //Añadiendo componentes a los paneles
         ((Pantalla) this.jPanel1).getComponente().add(fondoImagen);
         ((Pantalla) this.jPanel2).getComponente().add(fondoGame);
         ((Pantalla) this.jPanel2).getComponente().add(Burbujas);
+        ((Pantalla) this.jPanel2).getComponente().add(nave);
     }
     
     private void refresh(){
