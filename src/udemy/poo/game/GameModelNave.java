@@ -14,6 +14,7 @@ import udemy.poo.elementos.Nave;
 import udemy.poo.elementos.Puntuacion;
 import udemy.poo.elementos.burbujas;
 import udemy.poo.pantalla.Pantalla;
+import udemy.poo.sonido.Musica;
 
 /**
  *
@@ -22,6 +23,8 @@ import udemy.poo.pantalla.Pantalla;
 public class GameModelNave extends javax.swing.JDialog {
     private int fps = 30;
     private Timer tiempo;
+    private Musica music = new Musica("LargestPiano.mp3","Naruto.mp3");
+    Thread hilo = new Thread(music);
     /**
      * Creates new form GameModelNave
      */
@@ -61,6 +64,7 @@ public class GameModelNave extends javax.swing.JDialog {
         ((Pantalla) this.jPanel2).getComponente().add(Burbujas);
         ((Pantalla) this.jPanel2).getComponente().add(nave);
         ((Pantalla) this.jPanel2).getComponente().add(puntuacion);
+        hilo.start();
     }
     
     private void refresh(){
@@ -154,6 +158,7 @@ public class GameModelNave extends javax.swing.JDialog {
 
     private void backHomeButonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backHomeButonMouseClicked
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_backHomeButonMouseClicked
 
     private void infoButonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoButonMouseClicked
