@@ -4,8 +4,12 @@
  */
 package udemy.poo.game;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import udemy.poo.elementos.ImagenFondo;
 import udemy.poo.elementos.ImagenFondoGameN;
@@ -13,7 +17,9 @@ import udemy.poo.elementos.ImagenFondoGaming;
 import udemy.poo.elementos.Nave;
 import udemy.poo.elementos.Puntuacion;
 import udemy.poo.elementos.burbujas;
+import udemy.poo.inicio.Inicio;
 import udemy.poo.pantalla.Pantalla;
+import udemy.poo.sonido.EfectosDeMusica;
 import udemy.poo.sonido.Musica;
 
 /**
@@ -158,11 +164,41 @@ public class GameModelNave extends javax.swing.JDialog {
 
     private void backHomeButonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backHomeButonMouseClicked
         // TODO add your handling code here:
+        EfectosDeMusica sonido = new EfectosDeMusica("Zaz.mp3");
+        Thread hilo2 = new Thread(sonido);
+        hilo2.start();
         
+        Image imagen = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/udemy/poo/recursos/orbe.png"));
+        int answer = JOptionPane.showConfirmDialog(rootPane, "¿Seguro que deseas salir del juego?", "Esta saliendo del juego", JOptionPane.YES_NO_OPTION);
+        if (answer == JOptionPane.YES_OPTION){
+            JOptionPane.showMessageDialog(rootPane, "Saliendo del juego... y volviendo al menu principal", "Information code", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imagen));
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Inicio().setVisible(true);
+            }
+        });
+            this.dispose();
+            hilo.stop();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Sigue adelante", "Information code", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imagen));
+            
+        }
     }//GEN-LAST:event_backHomeButonMouseClicked
 
     private void infoButonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_infoButonMouseClicked
         // TODO add your handling code here:
+        EfectosDeMusica sonido = new EfectosDeMusica("Zaz.mp3");
+        Thread hilo2 = new Thread(sonido);
+        hilo2.start();
+        
+        String datos;
+        datos = "Usa las teclas W, A, S, D \n" + "\n" +
+                "W - Direccion arriba" + "\n" + 
+                "A - Direccion izquierda" + "\n" + 
+                "S - Direccion abajo" + "\n" + 
+                "D - Direccion derecha \n" + "\n" + 
+                "Ganale al orbe blanco";
+        JOptionPane.showMessageDialog(rootPane, datos, "Informacion del juego", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("/udemy/poo/recursos/orbe.png"));
     }//GEN-LAST:event_infoButonMouseClicked
 
     /**

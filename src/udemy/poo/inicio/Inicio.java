@@ -4,14 +4,19 @@
  */
 package udemy.poo.inicio;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import udemy.poo.elementos.ImagenFondo;
 import udemy.poo.game.GameModelNave;
 import udemy.poo.pantalla.Pantalla;
+import udemy.poo.sonido.EfectosDeMusica;
 import udemy.poo.sonido.Musica;
 
 /**
@@ -153,7 +158,27 @@ public class Inicio extends javax.swing.JFrame {
 
     private void buronNaveGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buronNaveGameActionPerformed
         // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        EfectosDeMusica sonido = new EfectosDeMusica("Deslizar.mp3");
+        Thread hilo2 = new Thread(sonido);
+        hilo2.start();
+        
+        String datos;
+        Image imagen = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/udemy/poo/recursos/orbe.png"));
+        
+        datos = "Una nave busca romper la mayor cantidad de burbujas \n" + "\n" +
+                "No debes fallar en esta mision" + "\n" + 
+                "Todo tira d eun hilo" + "\n" + 
+                "Si llegas ser derrotado" + "\n" + 
+                "Todo habra terminado" + "\n" + 
+                "\nUsa la teclas: \n" + "\n" +
+                "P - Pausar el juego" + "\n" + 
+                "R - Reanudar el juego" + "\n" + 
+                "E - Salir del juego \n" + "\n" +  
+                "Ganale al orbe blanco";
+                
+        int answer = JOptionPane.showConfirmDialog(rootPane, datos, "Esta iniciando el juego", JOptionPane.YES_NO_OPTION);
+        if(answer == JOptionPane.YES_OPTION){
+            java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 GameModelNave dialog = new GameModelNave(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -165,12 +190,18 @@ public class Inicio extends javax.swing.JFrame {
                 dialog.setVisible(true);
             }
         });
-        hilo.stop();
+            hilo.stop();
         this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Escoge un juego", "Information code", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(imagen));
+            
+        }
+        
     }//GEN-LAST:event_buronNaveGameActionPerformed
 
     private void butonOrbesGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonOrbesGameActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_butonOrbesGameActionPerformed
 
     /**
